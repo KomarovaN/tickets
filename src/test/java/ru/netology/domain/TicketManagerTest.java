@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 public class TicketManagerTest {
     TicketRepository repo = new TicketRepository();
     TicketManager manager = new TicketManager(repo);
+    TicketByPriceAscComparator priceComparator = new TicketByPriceAscComparator();
     Ticket ticket1 = new Ticket(1, "IFA", "ITA", 100, 1);
     Ticket ticket2 = new Ticket(2, "IFB", "ITB", 400, 2);
     Ticket ticket3 = new Ticket(3, "IFC", "ITC", 300, 3);
@@ -14,6 +15,24 @@ public class TicketManagerTest {
     Ticket ticket6 = new Ticket(6, ticket2.getIATAFrom(), ticket2.getIATATo(), 300, 5);
     Ticket ticket7 = new Ticket(4, ticket2.getIATAFrom(), "ITD", 400, 4);
     Ticket ticket8 = new Ticket(5, "IFD", ticket2.getIATATo(), 500, 5);
+
+    @Test
+    public void shouldFindAllComparator() {
+        repo.save(ticket8);
+        repo.save(ticket7);
+        repo.save(ticket6);
+        repo.save(ticket1);
+        repo.save(ticket5);
+        repo.save(ticket4);
+        repo.save(ticket3);
+        repo.save(ticket2);
+        repo.save(ticket1);
+
+        Ticket[] expected = {ticket6, ticket4, ticket2, ticket5};
+        Ticket[] actual = manager.findAll(ticket2.getIATAFrom(), ticket2.getIATATo(), priceComparator);
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
 
     @Test
     public void shouldSearchByFromToPositive() {

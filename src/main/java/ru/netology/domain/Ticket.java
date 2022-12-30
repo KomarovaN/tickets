@@ -4,14 +4,14 @@ public class Ticket implements Comparable<Ticket> {
     int id;
     String IATAFrom;
     String IATATo;
-    int cost;
+    int price;
     int flightTime;
 
-    public Ticket(int id, String IATAFrom, String IATATo, int cost, int flightTime) {
+    public Ticket(int id, String IATAFrom, String IATATo, int price, int flightTime) {
         this.id = id;
         this.IATAFrom = IATAFrom;
         this.IATATo = IATATo;
-        this.cost = cost;
+        this.price = price;
         this.flightTime = flightTime;
     }
 
@@ -31,12 +31,15 @@ public class Ticket implements Comparable<Ticket> {
         return IATATo;
     }
 
+    public int getPrice() {
+        return price;
+    }
 
     @Override
     public int compareTo(Ticket o) {
-        if (this.cost < o.cost) {
+        if (this.price < o.price) {
             return -1;
-        } else if (this.cost > o.cost) {
+        } else if (this.price > o.price) {
             return 1;
         }
         return 0;
