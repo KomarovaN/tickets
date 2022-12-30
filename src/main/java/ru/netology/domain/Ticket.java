@@ -2,37 +2,41 @@ package ru.netology.domain;
 
 public class Ticket implements Comparable<Ticket> {
     int id;
-    String IATAFrom;
-    String IATATo;
+    String From;
+    String To;
     int price;
-    int flightTime;
+    int time;
 
-    public Ticket(int id, String IATAFrom, String IATATo, int price, int flightTime) {
+    public Ticket(int id, String From, String To, int price, int time) {
         this.id = id;
-        this.IATAFrom = IATAFrom;
-        this.IATATo = IATATo;
+        this.From = From;
+        this.To = To;
         this.price = price;
-        this.flightTime = flightTime;
+        this.time = time;
     }
 
     public boolean matches(String from, String to) {
-        return (getIATAFrom().equals(from) && getIATATo().equals(to));
+        return (getFrom().equals(from) && getTo().equals(to));
     }
 
     public int getId() {
         return id;
     }
 
-    public String getIATAFrom() {
-        return IATAFrom;
+    public String getFrom() {
+        return From;
     }
 
-    public String getIATATo() {
-        return IATATo;
+    public String getTo() {
+        return To;
     }
 
     public int getPrice() {
         return price;
+    }
+
+    public int getTime() {
+        return time;
     }
 
     @Override
