@@ -15,6 +15,7 @@ public class TicketManagerTest {
     Ticket ticket7 = new Ticket(4, ticket2.getIATAFrom(), "ITD", 400, 4);
     Ticket ticket8 = new Ticket(5, "IFD", ticket2.getIATATo(), 500, 5);
 
+    // тест, когда 1) находится несколько билетов;
     @Test
     public void shouldSearchByFromToPositive() {
         repo.save(ticket8);
@@ -33,6 +34,7 @@ public class TicketManagerTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    // тест, когда 2) находится ровно один билет;
     @Test
     public void shouldSearchByFromToPositiveOne() {
         repo.save(ticket8);
@@ -47,6 +49,7 @@ public class TicketManagerTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    // тесты, когда 3) находится 0 билетов, т.е. ни один билет не подходит
     @Test
     public void shouldSearchByFromToNegative() {
         repo.save(ticket8);
