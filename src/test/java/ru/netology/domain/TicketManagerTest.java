@@ -17,8 +17,9 @@ public class TicketManagerTest {
     Ticket ticket7 = new Ticket(4, ticket2.getFrom(), "ITD", 400, 4);
     Ticket ticket8 = new Ticket(5, "IFD", ticket2.getTo(), 500, 5);
 
+    // тест для метода c сортировкой по времени, когда 1) находится несколько билетов
     @Test
-    public void shouldFindAllTimeComparator() {
+    public void shouldFindAllTimeComparatorPositive() {
         repo.save(ticket8);
         repo.save(ticket7);
         repo.save(ticket6);
@@ -31,6 +32,39 @@ public class TicketManagerTest {
 
         Ticket[] expected = {ticket2, ticket4, ticket6, ticket5};
         Ticket[] actual = manager.findAll(ticket2.getFrom(), ticket2.getTo(), timeComparator);
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    // тест для метода c сортировкой по времени, , когда 2) находится ровно один билет
+    @Test
+    public void shouldFindAllTimeComparatorPositiveOne() {
+        repo.save(ticket8);
+        repo.save(ticket7);
+        repo.save(ticket3);
+        repo.save(ticket2);
+        repo.save(ticket1);
+
+        Ticket[] expected = {ticket2};
+        Ticket[] actual = manager.findAll(ticket2.getFrom(), ticket2.getTo(), timeComparator);
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    // тест для метода c сортировкой по времени, когда 3) находится 0 билетов, т.е. ни один билет не подходит
+    @Test
+    public void shouldFindAllTimeComparatorNegative() {
+        repo.save(ticket8);
+        repo.save(ticket7);
+        repo.save(ticket6);
+        repo.save(ticket5);
+        repo.save(ticket4);
+        repo.save(ticket3);
+        repo.save(ticket2);
+        repo.save(ticket1);
+
+        Ticket[] expected = new Ticket[0];
+        Ticket[] actual = manager.findAll("XXX", "YYY", timeComparator);
 
         Assertions.assertArrayEquals(expected, actual);
     }
@@ -53,7 +87,7 @@ public class TicketManagerTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
-    // тест, когда находится несколько билетов
+    // тест, когда 1) находится несколько билетов;
     @Test
     public void shouldSearchByFromToPositive() {
         repo.save(ticket8);
@@ -72,7 +106,7 @@ public class TicketManagerTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
-    // тест, когда находится один билет
+    // тест, когда 2) находится ровно один билет;
     @Test
     public void shouldSearchByFromToPositiveOne() {
         repo.save(ticket8);
@@ -87,7 +121,7 @@ public class TicketManagerTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
-    // тест, когда находится 0 билетов, т.е. ни один билет не подходит
+    // тест, когда 3) находится 0 билетов, т.е. ни один билет не подходит
     @Test
     public void shouldSearchByFromToNegative() {
         repo.save(ticket8);
