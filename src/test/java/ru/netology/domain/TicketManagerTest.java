@@ -52,6 +52,8 @@ public class TicketManagerTest {
 
         Assertions.assertArrayEquals(expected, actual);
     }
+
+    // тест, когда находится несколько билетов
     @Test
     public void shouldSearchByFromToPositive() {
         repo.save(ticket8);
@@ -70,6 +72,7 @@ public class TicketManagerTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    // тест, когда находится один билет
     @Test
     public void shouldSearchByFromToPositiveOne() {
         repo.save(ticket8);
@@ -84,6 +87,7 @@ public class TicketManagerTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    // тест, когда находится 0 билетов, т.е. ни один билет не подходит
     @Test
     public void shouldSearchByFromToNegative() {
         repo.save(ticket8);
