@@ -41,7 +41,7 @@ public class TicketRepository {
         return null;
     }
 
-    public Ticket[] findAll() {
+    public Ticket[] getAll() {
         return tickets;
     }
 

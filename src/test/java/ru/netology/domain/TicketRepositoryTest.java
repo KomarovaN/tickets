@@ -17,7 +17,7 @@ public class TicketRepositoryTest {
 
 
         Ticket[] expected = {ticket1, ticket2, ticket3};
-        Ticket[] actual = repo.findAll();
+        Ticket[] actual = repo.getAll();
 
         Assertions.assertArrayEquals(expected, actual);
     }
@@ -31,7 +31,7 @@ public class TicketRepositoryTest {
         repo.removeById(ticket2.getId());
 
         Ticket[] expected = {ticket1, ticket3};
-        Ticket[] actual = repo.findAll();
+        Ticket[] actual = repo.getAll();
 
         Assertions.assertArrayEquals(expected, actual);
     }
